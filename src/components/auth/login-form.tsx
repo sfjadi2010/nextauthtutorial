@@ -18,6 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { CardWrapper } from "@/components/auth/card-wrapper";
+import { FormError } from "../form-error";
 
 export const LoginForm = () => {
   const form = useForm<z.infer<typeof LoginSchema>>({
@@ -79,6 +80,7 @@ export const LoginForm = () => {
               )}
             />
           </div>
+          <FormError message="Invalid credentials" />
           <Button type="submit" className="w-full">Login</Button>
         </form>
       </Form>
