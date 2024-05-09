@@ -22,6 +22,7 @@ import {
 import { CardWrapper } from "@/src/components/auth/card-wrapper";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
+import { register } from "@/actions/register";
 
 export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -44,7 +45,11 @@ export const RegisterForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      // console.log(values);
+      register(values)
+        .then((data) => {
+            setError(data.error);
+            setSuccess(data.success);
+        });
     });
   };
 
@@ -68,7 +73,7 @@ export const RegisterForm = () => {
                     <Input
                       {...field}
                       id="fname"
-                      placeholder="Salman"
+                      placeholder="first name"
                       disabled={isPending}
                     />
                   </FormControl>
@@ -87,7 +92,7 @@ export const RegisterForm = () => {
                     <Input
                       {...field}
                       id="lname"
-                      placeholder="Farsi"
+                      placeholder="last name"
                       disabled={isPending}
                     />
                   </FormControl>
@@ -106,7 +111,7 @@ export const RegisterForm = () => {
                     <Input
                       {...field}
                       id="email"
-                      placeholder="salman.farsi@test.com"
+                      placeholder="example@domain.com"
                       disabled={isPending}
                     />
                   </FormControl>
